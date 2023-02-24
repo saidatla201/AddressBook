@@ -6,29 +6,67 @@ using System.Threading.Tasks;
 
 namespace AddressBook
 {
-    public  class Contact
+    internal class AddressBook
     {
-        public void contact()
+        public static void CreateContacts()
         {
-            Console.Write("Enter the First name :");
-            string Firstname = Console.ReadLine();
-            Console.Write("Enter the Last name :");
-            string Lastname = Console.ReadLine();
-            Console.Write("Enter the Address :");
-            string Address = Console.ReadLine();
-            Console.Write("Enter the State name :");
-            string Statename = Console.ReadLine();
-            Console.Write("Enter the District name :");
-            string District = Console.ReadLine();
-            Console.Write("Enter the Zip Code :");
-            int Zipcode = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Enter your Phone Number :");
-            long  PhoneNum = Convert.ToInt32(Console.ReadLine());
+            //Creating a object to access non-static method (Contact Class)
+            Contact contact = new Contact();
+            //reading data and storing in set method/properties 
+            Console.Write("Enter First Name : ");
+            contact.FirstName = Console.ReadLine();
+            //Last Name 
+            Console.Write("Enter Last Name : ");
+            contact.LastName = Console.ReadLine();
+            //Address
+            Console.Write("Enter Address : ");
+            contact.Address = Console.ReadLine();
+            //City
+            Console.Write("Enter City Name : ");
+            contact.City = Console.ReadLine();
+            //State Name 
+            Console.Write("Enter State Name : ");
+            contact.State = Console.ReadLine();
+            //ZIP Code
+            Console.Write("Enter ZIP Code : ");
+            contact.ZIPCode = Convert.ToInt32(Console.ReadLine());
+            //Phone Number
+            Console.Write("Enter Phone Number : ");
+            contact.PhoneNumber = Convert.ToInt64(Console.ReadLine());
+            //Email Id :
+            Console.Write("Enter Email Id : ");
+            contact.Email = Console.ReadLine();
+            Console.WriteLine("\nContact Added Succesfully....!\n");
 
+            //storing in user defiened data type list
+            List<Contact> data = new List<Contact>();
+            data.Add(contact); //Add is a method in List
 
+            Console.WriteLine("Here is the Contact Details Saved\n");
 
-
-
+            foreach (Contact record in data)
+            {
+                Console.WriteLine("First Name : " + record.FirstName);
+                Console.WriteLine("Last Name : " + record.LastName);
+                Console.WriteLine("Address : " + record.Address);
+                Console.WriteLine("City : " + record.City);
+                Console.WriteLine("State : " + record.State);
+                Console.WriteLine("ZIP Code : " + record.ZIPCode);
+                Console.WriteLine("Phone Number : " + record.PhoneNumber);
+                Console.WriteLine("Email Id : " + record.Email);
+            }
         }
     }
+    public class Contact
+    {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Address { get; set; }
+        public string City { get; set; }
+        public string State { get; set; }
+        public int ZIPCode { get; set; }
+        public long PhoneNumber { get; set; }
+        public string Email { get; set; }
+    }
 }
+
