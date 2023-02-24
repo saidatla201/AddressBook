@@ -8,11 +8,14 @@ namespace AddressBook
 {
     internal class AddressBook
     {
-        public static void CreateContacts()
+        //storing in user defiened data type list
+        List<Contact> data = new List<Contact>();
+        public void CreateContacts()
         {
-            //Creating a object to access non-static method (Contact Class)
+
+            
             Contact contact = new Contact();
-            //reading data and storing in set method/properties 
+            
             Console.Write("Enter First Name : ");
             contact.FirstName = Console.ReadLine();
             //Last Name 
@@ -36,14 +39,14 @@ namespace AddressBook
             //Email Id :
             Console.Write("Enter Email Id : ");
             contact.Email = Console.ReadLine();
-            Console.WriteLine("\nContact Added Succesfully....!\n");
 
-            //storing in user defiened data type list
-            List<Contact> data = new List<Contact>();
-            data.Add(contact); //Add is a method in List
+            data.Add(contact); //contact added in generic list
 
-            Console.WriteLine("Here is the Contact Details Saved\n");
-
+        }
+        public void DisplayContact()
+        {
+            CreateContacts(); //before display contact details need to take user details
+            Console.WriteLine("\nHere is the contact details saved.\n");
             foreach (Contact record in data)
             {
                 Console.WriteLine("First Name : " + record.FirstName);
@@ -54,6 +57,65 @@ namespace AddressBook
                 Console.WriteLine("ZIP Code : " + record.ZIPCode);
                 Console.WriteLine("Phone Number : " + record.PhoneNumber);
                 Console.WriteLine("Email Id : " + record.Email);
+            }
+        }
+
+        public void EditContact()
+        {
+            DisplayContact(); //to edit the contact need to save the contact details first
+            Console.WriteLine("\nTo Edit Contact Enter  First Name\n");
+            string name = Console.ReadLine();
+            foreach (var record in data)
+            {
+                if (record.FirstName == name)
+                {
+                    Console.WriteLine("Contact Found...Enter the option to Edit the Contact: ");
+                    Console.WriteLine("1 to Change First name \n2 to Change Last name \n3 to Change Address  \n4 to Change City  \n5 to Change State  \n6 to Change Zip  \n7 to Change Phonenumber  \n8 to Change Email \n9 Exit");
+                    int Check = Convert.ToInt32(Console.ReadLine());
+                    switch (Check)
+                    {
+                        case 1:
+                            Console.WriteLine("Enter the New First Name: ");
+                            record.FirstName = Console.ReadLine();
+                            DisplayContact();
+                            break;
+                        case 2:
+                            Console.WriteLine("Enter the New Last Name: ");
+                            record.LastName = Console.ReadLine();
+                            DisplayContact();
+                            break;
+                        case 3:
+                            Console.WriteLine("Enter the New Address: ");
+                            record.Address = Console.ReadLine();
+                            break;
+                        case 4:
+                            Console.WriteLine("Enter the New City: ");
+                            record.City = Console.ReadLine();
+                            break;
+                        case 5:
+                            Console.WriteLine("Enter the New State: ");
+                            record.State = Console.ReadLine();
+                            break;
+                        case 6:
+                            Console.WriteLine("Enter the New Pin Code: ");
+                            record.ZIPCode = Convert.ToInt32(Console.ReadLine());
+                            break;
+                        case 7:
+                            Console.WriteLine("Enter the New Phone Number: ");
+                            record.PhoneNumber = Convert.ToInt64(Console.ReadLine());
+                            break;
+                        case 8:
+                            Console.WriteLine("Enter the New Email: ");
+                            record.Email = Console.ReadLine();
+                            break;
+                        case 9:
+                            return;
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Contact Not Found. Enter the valid name!");
+                }
             }
         }
     }
